@@ -3,6 +3,9 @@ import { ExpressionStmt, PrintStmt, Stmt, VarStmt } from './stmt.js'
 import { Token, TokenType } from './token.js'
 
 // 语法规则：
+// program        → declaration* EOF ;
+// block           → "{" declaration* "}" | statement* 
+// statement      → expression ";" | "print" expression ";" ;
 // expression     → equality ;
 // equality       → comparison ( ( "!=" | "==" ) comparison )* ;
 // comparison     → term ( ( ">" | ">=" | "<" | "<=" ) term )* ;
@@ -30,11 +33,8 @@ class Parser {
     return statements
   }
 
-  private declaration(): Stmt {
-    if (this.match(TokenType.VAR)) {
-      return this.varDeclaration()
-    }
-    return this.statement()
+  private block(): Stmt[] {
+    
   }
 
   private varDeclaration(): VarStmt {
